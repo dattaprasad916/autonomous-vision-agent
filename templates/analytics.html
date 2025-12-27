@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Analytics • VisionDetect</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Analytics Dashboard</h1>
+      <p class="subtitle">Inference insights and detection statistics</p>
+
+      <div class="stats">
+        <h3>Most Detected Objects</h3>
+        <ul>
+          {% for k, v in label_counts.items() %}
+            <li><b>{{ k }}</b> : {{ v }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="stats">
+        <h3>Model Usage</h3>
+        <ul>
+          {% for k, v in model_counts.items() %}
+            <li>{{ k }} → {{ v }} runs</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="stats">
+        <h3>Average Confidence</h3>
+        <ul>
+          {% for k, v in avg_conf.items() %}
+            <li>{{ k }} → {{ v }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="stats">
+        <h3>Average Inference Time</h3>
+        <p>{{ avg_time }} ms</p>
+      </div>
+
+      <div class="footer">
+        <a href="/">← Back to Detection</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

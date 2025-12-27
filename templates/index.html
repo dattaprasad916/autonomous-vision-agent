@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VisionDetect • Object Detection</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+
+      <h1>VisionDetect</h1>
+      <p class="subtitle">
+        YOLOv8-powered object detection system with visual inference output
+      </p>
+
+     <form class="upload-box" action="/detect" method="post" enctype="multipart/form-data">
+
+  <select name="model">
+    <option value="yolov8n">YOLOv8 Nano (Fast)</option>
+    <option value="yolov8s">YOLOv8 Small (Accurate)</option>
+  </select>
+
+  <br><br>
+  <input type="file" name="file" required>
+  <br>
+  <button type="submit">Run Detection</button>
+</form>
+
+{% if model_used %}
+<p class="subtitle">Model used: <b>{{ model_used }}</b></p>
+{% endif %}
+
+
+      {% if raw_image %}
+      <div class="images">
+        <div class="image-card">
+          <h3>Original Image</h3>
+          <img src="{{ raw_image }}">
+        </div>
+
+        <div class="image-card">
+          <h3>Detected Objects</h3>
+          <img src="{{ processed_image }}">
+        </div>
+      </div>
+
+      <div class="stats">
+        <h3>Detection Summary ({{ time_ms }} ms)</h3>
+        <ul>
+          {% for label, count in counts.items() %}
+            <li><b>{{ label }}</b> : {{ count }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <div class="footer">
+        Built with FastAPI & YOLOv8 • Computer Vision Demo
+      </div>
+<div class="footer">
+  <a href="/analytics">View Analytics Dashboard →</a>
+</div>
+
+    </div>
+  </div>
+</body>
+</html>
